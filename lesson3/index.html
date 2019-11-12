@@ -1,0 +1,224 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-12 15:03:58
+ * @LastEditTime: 2019-11-12 16:46:56
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson3/index.html
+ -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+
+    <title>猜数字游戏</title>
+
+    <style>
+      html {
+        font-family: sans-serif
+      }
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto
+      }
+      .lastResult {
+        color: white;
+        padding: 3px
+      }
+      .start{
+          display: none;
+      }
+      .err{
+          background: red;
+      }
+      .succ{
+          background: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>猜数字游戏</h1>
+
+    <p>我刚才随机选定了一个100以内的自然数。看你能否在 10 次以内猜中它。每次我都会告诉你所猜的结果是高了还是低了。</p>
+
+    <div class="form">
+      <label for="guessField">请猜数: </label>
+      <input type="text" id="guessField" class="guessField">
+      <input type="submit" value="确定" class="guessSubmit">
+    </div>
+
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
+
+    <div class="start">
+        <button class="btn-start">开始游戏</button>
+    </div>
+
+    <script>
+      // 开始编写 JavaScript 代码
+      /* 
+        程序员思维
+        1.随机生成一个 100 以内的自然数。
+        2.记录玩家当前的轮数。从 1 开始。
+        3.为玩家提供一种猜测数字的方法。
+        4.一旦有结果提交，先将其记录下来，以便用户可以看到他们先前的猜测。
+        5.然后检查它是否正确。
+        6.如果正确：
+            显示祝贺消息。
+            阻止玩家继续猜测（这会使游戏混乱）。
+            显示控件允许玩家重新开始游戏。
+        7.如果出错，并且玩家有剩余轮次：
+            告诉玩家他们错了。
+            允许他们输入另一个猜测。
+            轮数加 1。
+        8.如果出错，并且玩家没有剩余轮次：
+            告诉玩家游戏结束。
+            阻止玩家继续猜测（这会使游戏混乱）。
+            显示控件允许玩家重新开始游戏。
+        9.一旦游戏重启，确保游戏的逻辑和UI完全重置，然后返回步骤1。
+      */
+    // 生成随机数
+    function radomNum(){
+        const rNum = parseInt(Math.random() * 100);
+        return rNum;
+    }
+
+    // 获取当前的次数(从0开始,点击确定算1次)
+    let cNum = 0;
+    // 当前的随机数
+    let rNum = radomNum();
+    console.log(rNum)
+    
+    
+    // 获取Dom元素
+    // 输入框的值
+    const guessField = document.querySelector('.guessField');
+    // 确定按钮
+    const guessSubmit = document.querySelector('.guessSubmit');
+
+    // 上次猜的数
+    const guesses = document.querySelector('.guesses');
+    // 是否猜对
+    const lastResult = document.querySelector('.lastResult');
+    // 提示:猜的高了还是低了
+    const lowOrHi = document.querySelector('.lowOrHi');
+
+    // 重新开始
+    const start = document.querySelector('.start');
+    const btnStart = document.querySelector('.btn-start');
+    
+    // 上次猜的数
+    let arrNum = [];
+
+
+    // 提示文字
+    const succTip = "恭喜你！猜对了！";
+    const errTip = "你猜错了";
+    const endTip = "!!!GAME OVER!!!";
+
+    const errMaxTip = '刚才你猜高了！';
+    const errMinTip = '刚才你猜低了！';
+
+    // 点击确定事件，执行
+    guessSubmit.addEventListener('click',() => {
+        const inputVal = parseInt(guessField.value || 0);
+        arrNum.push(inputVal);
+        
+        // 清空
+        guessField.value = "";
+        // 超过10次-结束
+        if(cNum >= 9) {
+            // 结束游戏
+            endGame(endTip, 'red')
+            return
+        }
+
+        checkNum(inputVal);    
+
+        // 加一次
+        // cNum++;
+    })
+
+    // 重新开始游戏
+    btnStart.addEventListener('click', startGame)
+
+    // 数组转成字符串
+    function strNum(arr){
+        let arrStr = ''
+        for(let i=0;i<arr.length;i++) {
+            arrStr+= arr[i] + ', '
+        }
+        return arrStr;
+    }
+
+    // 结束游戏
+    function endGame(tip,bgColor){
+        guesses.innerHTML = `上次猜的数: ${strNum(arrNum)}`;
+
+        lastResult.innerHTML= tip;
+        lastResult.style.backgroundColor = bgColor;
+
+        lowOrHi.innerHTML = '';
+        start.style.display = 'block';
+
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+
+        // start.style.display = 'block';
+        arrNum = [];
+        cNum = 0;
+    }
+
+    // 开始新游戏
+    function startGame(){
+        rNum = radomNum();
+        console.log(rNum)
+        
+        guesses.innerHTML = "";
+        lastResult.innerHTML= "";
+        lastResult.style.backgroundColor = "";
+
+        lowOrHi.innerHTML = "";
+        start.style.display = 'none';
+
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+    }
+
+    // 判断是否正确
+    function checkNum(num){
+        if(num === rNum){
+            successNumber()
+        } else {
+            if(num < rNum) {
+                errorNumber(errMinTip)
+            } else {
+                errorNumber(errMaxTip)
+            }
+            // 加一次
+            cNum++;
+        }
+    }
+
+    // 正确的数
+    function successNumber(){
+        endGame(succTip, 'green')
+    }
+
+    // 错误的数
+    function errorNumber(tip){
+        guesses.innerHTML = `上次猜的数: ${strNum(arrNum)}`;
+        lastResult.innerHTML= errTip;
+        lastResult.style.backgroundColor = "red";
+
+        lowOrHi.innerHTML = tip;
+    }
+    </script>
+  </body>
+</html>
