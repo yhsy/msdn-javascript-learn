@@ -1,0 +1,78 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-13 18:18:49
+ * @LastEditTime: 2019-11-13 18:35:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson7/demo1-christmas.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo1-Christmas</title>
+</head>
+<body>
+    <h2>找出圣诞消息: 既包含'Christmas'</h2>
+    <ul>
+    </ul>
+    <div class="btns">
+        <button class="btn-reset">默认消息</button>
+        <button class="btn-ok">圣诞消息</button>
+    </div>
+
+    <script>
+        let list = document.querySelector('ul');
+        
+        // 重置
+        const reset = document.querySelector('.btn-reset');
+        // 获取圣诞消息
+        const ok = document.querySelector('.btn-ok');
+
+        list.innerHTML = '';
+        // 默认消息
+        let msgArr =  ['Happy Birthday!',
+                 'Merry Christmas my love',
+                 'A happy Christmas to all the family',
+                 'You\'re all I want for Christmas',
+                 'Get well soon'];
+
+        // 默认显示全部消息
+        list.innerHTML = msgCon(msgArr);
+
+        // 默认消息
+        reset.addEventListener('click', () => {
+            list.innerHTML = msgCon(msgArr);
+        })
+
+        // 圣诞消息
+        ok.addEventListener('click', () => {
+            list.innerHTML = filterCon(msgArr);
+        })
+
+        // 根据消息内容渲染
+        function msgCon(arr){
+            let msgStr = ''
+            for(let i=0;i<arr.length;i++){
+                msgStr+= '<li>' + arr[i] + '</li>';
+            }
+            return msgStr;
+        }
+
+        // 找出包含圣诞的消息
+        function filterCon(arr){
+            let filterStr = '';
+            for(let i=0;i<arr.length;i++){
+                if(arr[i].indexOf('Christmas') !== -1){
+                    filterStr+= '<li>' + arr[i] + '</li>';
+                }
+            }
+            return filterStr;
+        }
+
+
+    </script>
+</body>
+</html>
