@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-13 17:46:22
- * @LastEditTime: 2019-11-13 18:03:46
+ * @LastEditTime: 2019-11-13 18:14:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learnJS/lesson7/index.html
@@ -13,6 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>lesson7-字符串常用方法</title>
+    <style>
+        li{
+            line-height: 40px;
+        }
+    </style>
 </head>
 <body>
     <h2>默认字符串:'Mozilla'</h2>
@@ -21,6 +26,9 @@
         <li>字符串的第3位的内容: <strong class="get"></strong></li>
         <li>字符串zi的位置:<strong class="position"></strong> </li>
         <li>获取字符中的zi:<strong class="zi"></strong></li>
+        <li>转换成小写:<strong class="lower"></strong></li>
+        <li>转换成大写:<strong class="upper"></strong></li>
+        <li>替换'Moz'为'Van':<strong class="van"></strong></li>
     </ul>
 
     <script>
@@ -43,6 +51,18 @@
         // 取得指定索引的内容
         const zi = document.querySelector('.zi');
         zi.textContent = str.slice(2,4);
+
+        // 转成小写
+        const lower = document.querySelector('.lower');
+        lower.textContent = str.toLowerCase();
+
+        // 转成大写
+        const upper = document.querySelector('.upper');
+        upper.textContent = str.toUpperCase();
+
+        // 替换字符串
+        const van = document.querySelector('.van');
+        van.textContent = str.replace('Moz','Van');
 
     </script>
 </body>
