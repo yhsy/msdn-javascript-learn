@@ -1,0 +1,29 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-13 15:57:03
+ * @LastEditTime: 2019-11-13 15:59:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson4/index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lesson4</title>
+</head>
+<body>
+    <button>Press me</button>
+
+    <script>
+        const button = document.querySelector('button');
+
+        button.onclick = function() {
+        let name = prompt('What is your name?');
+        alert('Hello ' + name + ', nice to see you!');
+        }
+    </script>
+</body>
+</html>
