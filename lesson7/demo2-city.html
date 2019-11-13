@@ -1,0 +1,64 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-13 18:44:26
+ * @LastEditTime: 2019-11-13 19:05:08
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson7/demo2-city.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo2-城市名称改成首字母大写</title>
+</head>
+<body>
+    <h2>城市名称改成首字母大写</h2>
+    <ul></ul>
+    <div class="btns">
+        <button class="btn-reset">默认城市名</button>
+        <button class="btn-ok">转换城市名</button>
+    </div>
+
+    <script>
+        let list = document.querySelector('ul');
+        list.innerHTML = '';
+        const reset = document.querySelector('.btn-reset');
+        const ok = document.querySelector('.btn-ok');
+
+        const cityArr =  ['lonDon', 'ManCHESTer', 'BiRmiNGHAM', 'liVERpoOL'];
+
+        list.innerHTML = cityCon(cityArr);
+
+        reset.addEventListener('click', () => {
+            list.innerHTML = cityCon(cityArr);
+        })
+
+        ok.addEventListener('click', () => {
+            list.innerHTML = filterCon(cityArr);
+        })
+
+        // 默认城市名
+        function cityCon(arr){
+            let str = ''
+            for(let i=0;i<arr.length;i++){
+                str+= '<li>' + arr[i] +'</li>'
+            }
+            return str;
+        }
+
+        // 转成城市名
+        function filterCon(arr){
+            let fArr = '';
+            for(let i=0;i<arr.length;i++) {
+                const upper = arr[i].slice(0,1).toUpperCase();
+                const lower = arr[i].slice(1,arr[i].length).toLowerCase();
+                fArr+= '<li>'+upper+lower+'</li>';
+            }
+            return fArr;
+        }
+    </script>
+</body>
+</html>
