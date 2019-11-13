@@ -1,0 +1,68 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-13 19:08:58
+ * @LastEditTime: 2019-11-13 19:14:56
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson7/demo3-train.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo3-train火车站编码-简写</title>
+</head>
+<body>
+        <h2>火车站编码-简写</h2>
+    <ul></ul>
+    <div class="btns">
+        <button class="btn-reset">默认编码</button>
+        <button class="btn-ok">简写编码</button>
+    </div>
+
+    <script>
+        let list = document.querySelector('ul');
+        list.innerHTML = '';
+        const reset = document.querySelector('.btn-reset');
+        const ok = document.querySelector('.btn-ok');
+
+        const trainArr =  ['MAN675847583748sjt567654;Manchester Piccadilly',
+                'GNF576746573fhdg4737dh4;Greenfield',
+                'LIV5hg65hd737456236dch46dg4;Liverpool Lime Street',
+                'SYB4f65hf75f736463;Stalybridge',
+                'HUD5767ghtyfyr4536dh45dg45dg3;Huddersfield'];
+
+        list.innerHTML = cityCon(trainArr);
+
+        reset.addEventListener('click', () => {
+            list.innerHTML = cityCon(trainArr);
+        })
+
+        ok.addEventListener('click', () => {
+            list.innerHTML = filterCon(trainArr);
+        })
+
+        // 默认城市名
+        function cityCon(arr){
+            let str = ''
+            for(let i=0;i<arr.length;i++){
+                str+= '<li>' + arr[i] +'</li>'
+            }
+            return str;
+        }
+
+        // 转成简写
+        function filterCon(arr){
+            let fArr = '';
+            for(let i=0;i<arr.length;i++) {
+                const sArr = arr[i].split(';');
+                const name = sArr[0].slice(0,3);
+                fArr+= '<li>'+name+':'+sArr[1]+'</li>';
+            }
+            return fArr;
+        }
+    </script>
+</body>
+</html>
