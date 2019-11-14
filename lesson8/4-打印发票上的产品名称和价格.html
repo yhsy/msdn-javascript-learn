@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-11-14 11:31:32
- * @LastEditTime: 2019-11-14 15:55:50
+ * @LastEditTime: 2019-11-14 16:02:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learnJS/lesson8/4-打印发票上的产品名称和价格.html
@@ -49,16 +49,19 @@
         ok.addEventListener('click', () => {
             goodsArr=[];
             goodsStr = '';
+            let totalPrice = 0;
             for(let i=0;i<arr.length;i++) {
                 const itemArr = arr[i].split(':');
                 const name = itemArr[0]+ ' — ';
                 const price = '$'+itemArr[1];
+                totalPrice = (totalPrice*100 + itemArr[1]*100) / 100;
                 // goodsArr.push('<li>' +name + price+ '</li>');
                 goodsStr+='<li>' + name + price + '</li>';
             }
             // console.log(JSON.stringify(goodsArr))
             // list.innerHTML = goodsArr.join('');
             list.innerHTML = goodsStr;
+            total.textContent = totalPrice;
         })
 
     </script>
