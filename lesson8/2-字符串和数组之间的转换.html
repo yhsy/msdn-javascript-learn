@@ -1,0 +1,54 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-14 10:20:41
+ * @LastEditTime: 2019-11-14 10:48:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/2-字符串和数组之间的转换.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2-字符串和数组之间的转换</title>
+</head>
+<body>
+    <h2>字符串和数组之间的转换</h2>
+    <ul>
+        <li>默认字符串: 'Manchester,London,Liverpool,Birmingham,Leeds,Carlisle;'</li>
+        <li>默认字符串长度: <strong class="len"></strong></li>
+        <li>逗号分割转成数组: <strong class="toArr"></strong> </li>
+        <li>数组长度: <strong class="arrLen"></strong></li>
+        <li>数组再转字符串join: <strong class="newStr"></strong> </li>
+        <li>数组再转字符串toString: <strong class="newStr2"></strong> </li>
+
+
+    </ul> 
+    <script>
+        const str = 'Manchester,London,Liverpool,Birmingham,Leeds,Carlisle';
+        const len = document.querySelector('.len');
+        const toArr = document.querySelector('.toArr');
+        const arrLen = document.querySelector('.arrLen');
+        const newStr = document.querySelector('.newStr');
+        const newStr2 = document.querySelector('.newStr2');
+
+
+        len.textContent = str.length;
+        let arr = str.split(',');
+        toArr.textContent = JSON.stringify(arr);
+        arrLen.textContent = arr.length;
+
+        // 再把数组转成字符串,中间用逗号分割
+        // join可以指定分隔符,toString默认是以逗号分割
+        let nStr = arr.join(';');
+        let nStr2 = arr.toString();
+        newStr.textContent = nStr;
+        newStr2.textContent = nStr2;
+        
+
+
+    </script>
+</body>
+</html>
