@@ -1,0 +1,49 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-14 10:54:13
+ * @LastEditTime: 2019-11-14 11:26:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson8/3-添加和删除数组项.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3-添加和删除数组项</title>
+</head>
+<body>
+    <h2>添加和删除数组项</h2>
+    <ul>
+        <li>默认数组:  ['Manchester', 'London', 'Liverpool', 'Birmingham', 'Leeds', 'Carlisle']</li>
+        <li>push():数组末尾添加元素: <strong class="push"></strong></li>
+        <li>pop():数组末尾删除元素: <strong class="pop"></strong></li>
+        <li>unshift():数组开始添加元素: <strong class="unshift"></strong></li>
+        <li>shift():数组开始删除元素: <strong class="shift"></strong></li>
+    </ul>
+
+    <script>
+        const pushLi = document.querySelector('.push');
+        const popLi = document.querySelector('.pop');
+        const unshiftLi = document.querySelector('.unshift');
+        const shiftLi = document.querySelector('.shift');
+
+        const arr =  ['Manchester', 'London', 'Liverpool', 'Birmingham', 'Leeds', 'Carlisle'];
+        // 数组末尾-添加元素
+        arr.push('Cardiff');
+        pushLi.textContent = JSON.stringify(arr);
+        // 数组末尾-删除元素
+        arr.pop()
+        popLi.textContent = JSON.stringify(arr);
+        // 数组开始-添加元素
+        arr.unshift('Edinburgh');
+        unshiftLi.textContent = JSON.stringify(arr);
+        // 数组开始-删除元素
+        arr.shift();
+        shiftLi.textContent = JSON.stringify(arr);
+
+    </script>
+</body>
+</html>
