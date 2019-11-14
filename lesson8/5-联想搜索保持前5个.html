@@ -1,0 +1,67 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-14 16:07:10
+ * @LastEditTime: 2019-11-14 18:24:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson8/5-联想搜索保持前5个.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5-联想搜索保持前5个</title>
+</head>
+<body>
+    <h2>联想搜索保持前5个</h2>
+    <div class="m-sch">
+        <input type="text" class="ipt-sch" value="">
+        <button class="btn-sch">搜索</button>
+    </div>
+    <ul></ul>
+    <script>
+        const iptSch = document.querySelector('.ipt-sch');
+        const btnSch = document.querySelector('.btn-sch');
+        const list = document.querySelector('ul');
+        list.innerHTML = '';
+        let listArr = [];
+        let listStr = '';
+
+        let iptVal = '';
+
+        iptSch.addEventListener('change', (e) => {
+            console.log(e.target.value)
+            iptVal = e.target.value;
+        })
+
+        btnSch.addEventListener('click', (e) => {
+            // listArr = [];
+          if(iptVal === ''){
+            // console.log(iptVal)
+            alert('搜索内容不能为空!');
+          }else {
+            if(listArr.length >=5) {
+                listArr.pop();
+                listArr.unshift(iptVal);
+            }else {
+                listArr.unshift(iptVal);
+            }
+            list.innerHTML = listCon(listArr);
+            iptVal='';
+          }
+          iptSch.value = ''
+
+          function listCon(arr) {
+            let str = '';
+            for(let i=0;i<arr.length;i++){
+                str += '<li>' + arr[i]  +'</li>';
+            }
+            return str;
+          }
+        })
+
+    </script>
+</body>
+</html>
