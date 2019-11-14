@@ -1,0 +1,66 @@
+<!--
+ * @Author: your name
+ * @Date: 2019-11-14 11:31:32
+ * @LastEditTime: 2019-11-14 15:55:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /learnJS/lesson8/4-打印发票上的产品名称和价格.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4-打印发票上的产品名称和价格</title>
+</head>
+<body>
+    <h2>打印发票上的产品名称和价格</h2>
+    <div>默认商品数据:   ['Underpants:6.99','Socks:5.99','T-shirt:14.99','Trousers:31.99','Shoes:23.99']</div>
+    <ul>
+        <li>0</li>
+    </ul>
+    <p>Total:$<strong class="total">0.00</strong></p>
+    <div class="btns">
+            <button class="btn-reset">默认数据</button>
+            <button class="btn-ok">录入商品数据</button>
+        </div>
+
+    <script>
+        const list = document.querySelector('ul');
+        const total = document.querySelector('.total');
+
+        const reset = document.querySelector('.btn-reset');
+        const ok = document.querySelector('.btn-ok');
+
+        const arr =  ['Underpants:6.99',
+                'Socks:5.99',
+                'T-shirt:14.99',
+                'Trousers:31.99',
+                'Shoes:23.99'];
+        let goodsArr = [];
+        let goodsStr = '';
+
+        reset.addEventListener('click', () => {
+            goodsStr = '';
+            list.innerHTML = '<li>0</li>';
+        })
+
+        ok.addEventListener('click', () => {
+            goodsArr=[];
+            goodsStr = '';
+            for(let i=0;i<arr.length;i++) {
+                const itemArr = arr[i].split(':');
+                const name = itemArr[0]+ ' — ';
+                const price = '$'+itemArr[1];
+                // goodsArr.push('<li>' +name + price+ '</li>');
+                goodsStr+='<li>' + name + price + '</li>';
+            }
+            // console.log(JSON.stringify(goodsArr))
+            // list.innerHTML = goodsArr.join('');
+            list.innerHTML = goodsStr;
+        })
+
+    </script>
+</body>
+</html>
